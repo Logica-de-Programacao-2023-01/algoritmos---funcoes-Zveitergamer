@@ -1,0 +1,42 @@
+package main
+
+import (
+	"errors"
+	"fmt"
+	"strings"
+)
+
+func substituirVogaisPorAsterisco(str string) (string, error) {
+	if len(str) == 0 {
+		return "", errors.New("A string está vazia")
+	}
+
+	str = strings.ToLower(str)
+	vogais := []string{"a", "e", "i", "o", "u"}
+
+	for _, vogal := range vogais {
+		str = strings.ReplaceAll(str, vogal, "*")
+	}
+
+	return str, nil
+}
+
+func main() {
+	texto := "Hello, World!"
+	novaString, err := substituirVogaisPorAsterisco(texto)
+
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("Nova string:", novaString)
+	}
+
+	stringVazia := ""
+	novaString, err = substituirVogaisPorAsterisco(stringVazia)
+
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("Nova string:", novaString)
+	}
+}
