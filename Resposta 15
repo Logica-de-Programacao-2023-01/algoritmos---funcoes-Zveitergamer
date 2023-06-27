@@ -1,0 +1,44 @@
+package main
+
+import (
+	"errors"
+	"fmt"
+)
+
+func verificarPresenca(numero int, slice []int) (bool, error) {
+	if len(slice) == 0 {
+		return false, errors.New("O slice está vazio")
+	}
+
+	for _, elemento := range slice {
+		if elemento == numero {
+			return true, nil
+		}
+	}
+
+	return false, nil
+}
+
+func main() {
+	slice := []int{1, 2, 3, 4, 5}
+	numero := 3
+
+	presente, err := verificarPresenca(numero, slice)
+
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("O número", numero, "está presente no slice:", presente)
+	}
+
+	sliceVazio := []int{}
+	numero = 6
+
+	presente, err = verificarPresenca(numero, sliceVazio)
+
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("O número", numero, "está presente no slice:", presente)
+	}
+}
