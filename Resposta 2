@@ -1,0 +1,38 @@
+package main
+
+import (
+	"fmt"
+	"strings"
+)
+
+func contarVogais(texto string) int {
+	texto = strings.ToLower(texto)
+	vogais := []string{"a", "e", "i", "o", "u"}
+	contador := 0
+
+	for _, letra := range texto {
+		caracter := string(letra)
+
+		if contains(vogais, caracter) {
+			contador++
+		}
+	}
+
+	return contador
+}
+
+func contains(slice []string, elemento string) bool {
+	for _, valor := range slice {
+		if valor == elemento {
+			return true
+		}
+	}
+	return false
+}
+
+func main() {
+	texto := "Hello, World!"
+	qtdVogais := contarVogais(texto)
+
+	fmt.Printf("A quantidade de vogais no texto é: %d\n", qtdVogais)
+}
