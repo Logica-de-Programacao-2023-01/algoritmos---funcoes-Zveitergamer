@@ -1,0 +1,49 @@
+package main
+
+import (
+	"errors"
+	"fmt"
+)
+
+// Função que recebe um slice de inteiros e uma função como parâmetros
+// Aplica a função em cada elemento do slice e retorna a soma de todos os resultados
+// Retorna um erro caso o slice esteja vazio
+func aplicarFuncao(slice []int, fn func(int) int) (int, error) {
+	if len(slice) == 0 {
+		return 0, errors.New("O slice está vazio")
+	}
+
+	soma := 0
+	for _, valor := range slice {
+		resultado := fn(valor)
+		soma += resultado
+	}
+
+	return soma, nil
+}
+
+// Função de exemplo para aplicar em cada elemento do slice
+// Retorna o quadrado do número
+func quadrado(numero int) int {
+	return numero * numero
+}
+
+func main() {
+	slice := []int{1, 2, 3, 4, 5}
+	somaQuadrados, err := aplicarFuncao(slice, quadrado)
+
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("Soma dos quadrados:", somaQuadrados)
+	}
+
+	sliceVazio := []int{}
+	somaQuadrados, err = aplicarFuncao(sliceVazio, quadrado)
+
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("Soma dos quadrados:", somaQuadrados)
+	}
+}
