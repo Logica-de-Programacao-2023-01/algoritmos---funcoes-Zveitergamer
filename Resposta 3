@@ -1,0 +1,20 @@
+package main
+
+import "fmt"
+
+func concatenarStrings(strings []string) string {
+	resultado := ""
+
+	for _, str := range strings {
+		resultado += str
+	}
+
+	return resultado
+}
+
+func main() {
+	strings := []string{"Olá, ", "Mundo", "!"}
+	concatenacao := concatenarStrings(strings)
+
+	fmt.Println("Concatenação:", concatenacao)
+}
