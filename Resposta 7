@@ -1,0 +1,45 @@
+package main
+
+import (
+	"errors"
+	"fmt"
+)
+
+type FuncaoInteiro func(int) int
+
+func aplicarFuncao(slice []int, fn FuncaoInteiro) ([]int, error) {
+	if len(slice) == 0 {
+		return nil, errors.New("O slice está vazio")
+	}
+
+	resultado := make([]int, len(slice))
+	for i, v := range slice {
+		resultado[i] = fn(v)
+	}
+
+	return resultado, nil
+}
+
+func dobrarNumero(numero int) int {
+	return numero * 2
+}
+
+func main() {
+	numeros := []int{1, 2, 3, 4, 5}
+	resultado, err := aplicarFuncao(numeros, dobrarNumero)
+
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("Resultado:", resultado)
+	}
+
+	vazio := []int{}
+	resultado, err = aplicarFuncao(vazio, dobrarNumero)
+
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("Resultado:", resultado)
+	}
+}
