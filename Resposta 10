@@ -1,0 +1,41 @@
+package main
+
+import (
+	"errors"
+	"fmt"
+	"sort"
+)
+
+func ordenarSlice(slice []int) ([]int, error) {
+	if len(slice) == 0 {
+		return nil, errors.New("O slice está vazio")
+	}
+
+	// Cria uma cópia do slice original para não modificar o original
+	copia := make([]int, len(slice))
+	copy(copia, slice)
+
+	sort.Ints(copia)
+
+	return copia, nil
+}
+
+func main() {
+	numeros := []int{10, 5, 8, 2, 9, 1}
+	ordenados, err := ordenarSlice(numeros)
+
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("Slice ordenado:", ordenados)
+	}
+
+	vazio := []int{}
+	ordenados, err = ordenarSlice(vazio)
+
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("Slice ordenado:", ordenados)
+	}
+}
