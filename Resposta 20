@@ -1,0 +1,43 @@
+package main
+
+import (
+	"errors"
+	"fmt"
+)
+
+// Função que retorna um novo slice contendo apenas as strings que possuem mais de 5 caracteres
+// Retorna um erro caso o slice esteja vazio
+func filterStrings(strings []string) ([]string, error) {
+	if len(strings) == 0 {
+		return nil, errors.New("O slice está vazio")
+	}
+
+	filteredStrings := make([]string, 0)
+	for _, str := range strings {
+		if len(str) > 5 {
+			filteredStrings = append(filteredStrings, str)
+		}
+	}
+
+	return filteredStrings, nil
+}
+
+func main() {
+	strings := []string{"Gato", "Cachorro", "Elefante", "Leão", "Macaco", "Cobra", "Tigre"}
+	filteredStrings, err := filterStrings(strings)
+
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("Strings com mais de 5 caracteres:", filteredStrings)
+	}
+
+	emptyStrings := []string{}
+	filteredStrings, err = filterStrings(emptyStrings)
+
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("Strings com mais de 5 caracteres:", filteredStrings)
+	}
+}
