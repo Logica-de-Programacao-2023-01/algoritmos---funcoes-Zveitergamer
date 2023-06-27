@@ -1,0 +1,36 @@
+package main
+
+import (
+	"errors"
+	"fmt"
+	"strings"
+)
+
+func concatenarComVirgulas(strings []string) (string, error) {
+	if len(strings) == 0 {
+		return "", errors.New("O slice está vazio")
+	}
+
+	concatenado := strings.Join(strings, ",")
+	return concatenado, nil
+}
+
+func main() {
+	strings := []string{"Olá", "Mundo", "Golang"}
+	concatenado, err := concatenarComVirgulas(strings)
+
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("Concatenação:", concatenado)
+	}
+
+	vazio := []string{}
+	concatenado, err = concatenarComVirgulas(vazio)
+
+	if err != nil {
+		fmt.Println("Erro:", err)
+	} else {
+		fmt.Println("Concatenação:", concatenado)
+	}
+}
